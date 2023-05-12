@@ -1,5 +1,5 @@
 :root {
-  background-color: #d82e35;
+  background-color: #ecf5ff;
   font-size: 62.5%;
 }
 
@@ -20,7 +20,7 @@ h4 {
 
 h1 {
   font-size: 5.4rem;
-  color: #fffeff;
+  color: #56a5eb;
   margin-bottom: 5rem;
 }
 
@@ -33,15 +33,17 @@ h2 {
   font-size: 4.2rem;
   margin-bottom: 4rem;
   font-weight: 700;
-  color: #fffeff;
 }
 
 h3 {
   font-size: 2.8rem;
   font-weight: 500;
 }
-
-/* UTILITIES */
+h4 {
+  font-size: 1.3rem;
+  color: #56a5eb;
+  font-weight: 500;
+}
 
 .container {
   width: 100vw;
@@ -51,6 +53,7 @@ h3 {
   align-items: center;
   max-width: 80rem;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 .container > * {
@@ -85,16 +88,16 @@ h3 {
   padding: 1rem 0;
   width: 20rem;
   text-align: center;
-  border: 0.1rem solid #d63c3a;
+  border: 0.1rem solid #56a5eb;
   margin-bottom: 1rem;
   text-decoration: none;
-  color: #d82e35;
+  color: #56a5eb;
   background-color: white;
 }
 
 .btn:hover {
   cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(156, 173, 182, 0.5);
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
   transform: translateY(-0.1rem);
   transition: transform 150ms;
 }
@@ -103,4 +106,34 @@ h3 {
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
+}
+
+/* FORMS */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin-bottom: 1rem;
+  width: 20rem;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  border: none;
+  box-shadow: 0 0.1rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+}
+
+input::placeholder {
+  color: #aaa;
+}
+.error-msg {
+  color: red;
+  display: none;
+  margin-top: 5px;
+}
+
+input:invalid + #code-error {
+  display: block;
 }

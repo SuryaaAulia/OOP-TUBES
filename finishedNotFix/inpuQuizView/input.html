@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Quiz</title>
+  <link rel="stylesheet" href="../mainPageView/mainpage.css">
+  <link rel="stylesheet" href="input.css">
+</head>
+<body>
+  <div class="container">
+    <div id="createQuiz" class="flex-center flex-column">
+      <h1>Create Quiz</h1>
+      <form>
+        <div class="form-group">
+          <label for="">Category</label>
+          <input type="text" name="category" id="category" placeholder="Enter category here">
+        <div class="form-group">
+          <label for="question">Question</label>
+          <input type="text" name="question" id="question" placeholder="Enter question here">
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="file" name="image" id="image">
+        </div>
+        <div class="form-group">
+          <div class="choice">
+            <input type="text" name="choice1" id="choice1text" placeholder="Enter choice 1">
+          </div>
+          <div class="choice">
+            <input type="text" name="choice2" id="choice2text" placeholder="Enter choice 2">
+          </div>
+          <div class="choice">
+            <input type="text" name="choice3" id="choice3text" placeholder="Enter choice 3">
+          </div>
+          <div class="choice">
+            <input type="text" name="choice4" id="choice4text" placeholder="Enter choice 4">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="answer">Correct Answer</label>
+          <select name="answer" id="answer">
+            <option value="1">Choice 1</option>
+            <option value="2">Choice 2</option>
+            <option value="3">Choice 3</option>
+            <option value="4" >Choice 4</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Create</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
