@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quiz</title>
+    <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+    <link rel="stylesheet" th:href="@{/css/addQuizPage.css}">
+</head>
+<body>
+<div class="container">
+    <div id="createQuiz" class="flex-center flex-column">
+        <h1>Create Quiz</h1>
+        <form th:action="@{/quiz/save}" method="post" th:object="${quiz}">
+            <div class="form-group">
+                <label for="">Category</label>
+                <input type="text" th:field="*{category}" id="category" placeholder="Enter category here">
+            </div>
+            <div th:each="question, questionIndex : *{questions}">
+                <div class="question-group">
+                    <div class="form-group">
+                        <label for="question">Question</label>
+                        <input type="text" th:field="*{questions[__${questionIndex.index}__].question}" placeholder="Enter question here">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" th:field="*{questions[__${questionIndex.index}__].image}">
+                    </div>
+                    <div class="form-group">
+                        <div class="choice">
+                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[0]}" placeholder="Enter choice 1">
+                        </div>
+                        <div class="choice">
+                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[1]}" placeholder="Enter choice 2">
+                        </div>
+                        <div class="choice">
+                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[2]}" placeholder="Enter choice 3">
+                        </div>
+                        <div class="choice">
+                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[3]}" placeholder="Enter choice 4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="answer">Correct Answer</label>
+                        <select th:field="*{questions[__${questionIndex.index}__].correctAnswer}">
+                            <option value="1">Choice 1</option>
+                            <option value="2">Choice 2</option>
+                            <option value="3">Choice 3</option>
+                            <option value="4">Choice 4</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
