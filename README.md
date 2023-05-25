@@ -8,5 +8,5 @@ Ada beberapa requirement yang diperlukan untuk menjalankan sistem QuiZZila ini:
   
 To-do:
   1. Membuat ERD (tolong @Muthia atau @Muf)
-  2. Melengkapi entity pada package Database
-  3. Pembagian untuk membuat model
+  2. Melengkapi entity pada package Model
+  3. Pembagian untuk membuat logic pada model
