@@ -112,6 +112,11 @@ input[type="email"]:valid ~ .validation span:last-child {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+input[type="password"] {
+    -webkit-text-security: disc;
+    -moz-text-security: disc;
+    text-security: disc;
+}
 
 .validation {
     display: none;
