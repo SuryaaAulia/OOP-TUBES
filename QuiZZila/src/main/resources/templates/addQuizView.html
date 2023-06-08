@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create Quiz</title>
@@ -9,46 +9,38 @@
 <body>
 <div class="container">
     <div id="createQuiz" class="flex-center flex-column">
-        <h1>Create Quiz</h1>
-        <form th:action="@{/quiz/save}" method="post" th:object="${quiz}">
+        <h1 th:text="${'Create Quiz'}"></h1>
+        <form action="/addQuiz" method="post">
             <div class="form-group">
-                <label for="">Category</label>
-                <input type="text" th:field="*{category}" id="category" placeholder="Enter category here">
+                <label th:for="category">Category</label>
+                <input type="text" name="category" id="category" th:placeholder="${'Enter category here'}" />
             </div>
-            <div th:each="question, questionIndex : *{questions}">
-                <div class="question-group">
-                    <div class="form-group">
-                        <label for="question">Question</label>
-                        <input type="text" th:field="*{questions[__${questionIndex.index}__].question}" placeholder="Enter question here">
-                    </div>
-                    <div class="form-group">
-                        <label for="image">Image</label>
-                        <input type="file" th:field="*{questions[__${questionIndex.index}__].image}">
-                    </div>
-                    <div class="form-group">
-                        <div class="choice">
-                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[0]}" placeholder="Enter choice 1">
-                        </div>
-                        <div class="choice">
-                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[1]}" placeholder="Enter choice 2">
-                        </div>
-                        <div class="choice">
-                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[2]}" placeholder="Enter choice 3">
-                        </div>
-                        <div class="choice">
-                            <input type="text" th:field="*{questions[__${questionIndex.index}__].choices[3]}" placeholder="Enter choice 4">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="answer">Correct Answer</label>
-                        <select th:field="*{questions[__${questionIndex.index}__].correctAnswer}">
-                            <option value="1">Choice 1</option>
-                            <option value="2">Choice 2</option>
-                            <option value="3">Choice 3</option>
-                            <option value="4">Choice 4</option>
-                        </select>
-                    </div>
+            <div class="form-group">
+                <label th:for="question">Question</label>
+                <input type="text" name="question" id="question" th:placeholder="${'Enter question here'}" />
+            </div>
+            <div class="form-group">
+                <div class="choice">
+                    <input type="text" name="choice1" id="choice1text" th:placeholder="${'Enter choice 1'}" />
                 </div>
+                <div class="choice">
+                    <input type="text" name="choice2" id="choice2text" th:placeholder="${'Enter choice 2'}" />
+                </div>
+                <div class="choice">
+                    <input type="text" name="choice3" id="choice3text" th:placeholder="${'Enter choice 3'}" />
+                </div>
+                <div class="choice">
+                    <input type="text" name="choice4" id="choice4text" th:placeholder="${'Enter choice 4'}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label th:for="answer">Correct Answer</label>
+                <select name="answer" id="answer">
+                    <option value="1">Choice 1</option>
+                    <option value="2">Choice 2</option>
+                    <option value="3">Choice 3</option>
+                    <option value="4" >Choice 4</option>
+                </select>
             </div>
             <button type="submit" class="btn">Create</button>
         </form>

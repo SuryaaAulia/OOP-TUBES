@@ -7,19 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class dashboardController {
     @GetMapping("/dashboard")
-    public String dashboardpage(Model dashboard){
-        return "dashboardView.html";
+    public String dashboardPage(Model model) {
+        return "dashboardView";
     }
+
     @GetMapping("/leaderboard")
-    public String leaderboardpage(Model leaderboard){
-        return "leaderboardView.html";
+    public String leaderboardPage(Model model) {
+        return "leaderboardView";
     }
+
     @GetMapping("/addQuiz")
-    public String createquizpage(Model createQuiz){
-        return "addQuizView.html";
+    public String createQuizPage(Model model) {
+        return "addQuizView";
     }
+
     @GetMapping("/quiz")
-    public String quizpage(Model quiz){
+    public String quizPage(Model model) {
         return "quizView";
     }
 }
