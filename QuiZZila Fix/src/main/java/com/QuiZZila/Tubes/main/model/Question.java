@@ -23,7 +23,17 @@ public class Question {
 	private int chose;
 
 	public Question() {
+		
+	}
+	
+	public Question(String title, String optionA, String optionB, String optionC, int ans, int chose) {
 		super();
+		this.title = title;
+		this.optionA = optionA;
+		this.optionB = optionB;
+		this.optionC = optionC;
+		this.ans = ans;
+		this.chose = chose;
 	}
 
 	public Question(int quesId, String title, String optionA, String optionB, String optionC, int ans, int chose) {

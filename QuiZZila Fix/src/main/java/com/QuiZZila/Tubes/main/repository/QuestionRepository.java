@@ -6,5 +6,5 @@ import com.QuiZZila.Tubes.main.model.Question;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
-
+    
 }

@@ -3,7 +3,12 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-
+h1 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bolder;
+  font-size: 76px;
+  color: #56a5eb;
+}
 body {
 	width: 100%;
 	overflow-x: hidden;

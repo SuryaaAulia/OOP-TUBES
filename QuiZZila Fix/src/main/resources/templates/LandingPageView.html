@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html
-      xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/css/LandingpagePage.css}">
 	<title>Landing Page</title>
 </head>
+
 <body>
-	
+
 	<!-- Importing NavBar -->
 	<div th:insert="NavigationBarView.html :: navbar"></div>
 
@@ -23,15 +24,18 @@
 				<p>Enter Your Name</p>
 				<input type="text" name="username" />
 				<p class="text-danger warning" th:if="${warning}" th:text="${warning}"></p>
-				<button type="submit" class="btn btn-warning">START QUIZ</button>
+				<button type="submit" class="btn btn-light"
+					style="color: #56a5eb; font-weight: bolder; font-size: 24px; ">START
+					QUIZ</button>
 			</form>
 		</div>
 	</div>
-	
+
 	<!-- Importing Footer -->
 	<div th:insert="FooterView.html :: footer"></div>
-	
+
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

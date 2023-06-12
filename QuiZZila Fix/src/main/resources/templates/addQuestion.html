@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Question</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Add New Question</h1>
+        <form th:action="@{/addQuestion}" method="POST" class="mt-5">
+            <div class="mb-3">
+                <label for="title" class="form-label">Question Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter question title"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="optionA" class="form-label">Option A</label>
+                <input type="text" class="form-control" id="optionA" name="optionA" placeholder="Enter option A"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="optionB" class="form-label">Option B</label>
+                <input type="text" class="form-control" id="optionB" name="optionB" placeholder="Enter option B"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="optionC" class="form-label">Option C</label>
+                <input type="text" class="form-control" id="optionC" name="optionC" placeholder="Enter option C"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="ans" class="form-label">Correct Answer</label>
+                <select class="form-select" id="ans" name="ans" required>
+                    <option value="" selected disabled>Select correct answer</option>
+                    <option value="1">Option A</option>
+                    <option value="2">Option B</option>
+                    <option value="3">Option C</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
