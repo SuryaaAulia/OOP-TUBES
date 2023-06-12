@@ -16,11 +16,6 @@ public class dashboardController {
         return "leaderboardView";
     }
 
-    @GetMapping("/addQuiz")
-    public String createQuizPage(Model model) {
-        return "addQuizView";
-    }
-
     @GetMapping("/quiz")
     public String quizPage(Model model) {
         return "quizView";

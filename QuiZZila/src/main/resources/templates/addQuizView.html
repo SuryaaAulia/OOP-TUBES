@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create Quiz</title>
@@ -7,44 +7,74 @@
     <link rel="stylesheet" th:href="@{/css/addQuizPage.css}">
 </head>
 <body>
-<div class="container">
-    <div id="createQuiz" class="flex-center flex-column">
-        <h1 th:text="${'Create Quiz'}"></h1>
-        <form action="/addQuiz" method="post">
-            <div class="form-group">
-                <label th:for="category">Category</label>
-                <input type="text" name="category" id="category" th:placeholder="${'Enter category here'}" />
-            </div>
-            <div class="form-group">
-                <label th:for="question">Question</label>
-                <input type="text" name="question" id="question" th:placeholder="${'Enter question here'}" />
-            </div>
-            <div class="form-group">
-                <div class="choice">
-                    <input type="text" name="choice1" id="choice1text" th:placeholder="${'Enter choice 1'}" />
-                </div>
-                <div class="choice">
-                    <input type="text" name="choice2" id="choice2text" th:placeholder="${'Enter choice 2'}" />
-                </div>
-                <div class="choice">
-                    <input type="text" name="choice3" id="choice3text" th:placeholder="${'Enter choice 3'}" />
-                </div>
-                <div class="choice">
-                    <input type="text" name="choice4" id="choice4text" th:placeholder="${'Enter choice 4'}" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label th:for="answer">Correct Answer</label>
-                <select name="answer" id="answer">
-                    <option value="1">Choice 1</option>
-                    <option value="2">Choice 2</option>
-                    <option value="3">Choice 3</option>
-                    <option value="4" >Choice 4</option>
-                </select>
-            </div>
-            <button type="submit" class="btn">Create</button>
-        </form>
-    </div>
+<div class="flex-center flex-column">
+<h1>Create Quiz</h1>
 </div>
+<form id="quizForm" action="/addQuiz" method="post">
+    <div class="form-group">
+        <label for="title" >Quiz Title:</label>
+        <input type="text" id="title" name="title" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select id="category" name="category" class="quiz-category" required>
+            <option value="math">Data Structure</option>
+            <option value="science">Discrete Mathematics</option>
+            <option value="english">Algorithm</option>
+            <option value="all">None</option>
+        </select>
+    </div>
+
+    <div id="questionsContainer">
+        <div class="question">
+            <label for="question1">Question 1:</label>
+            <input type="text" id="question1" name="questions[0].text" class="question-input" placeholder="Enter question here" required/>
+
+            <div class="answer">
+                <label for="choice1">Choice 1:</label>
+                <input type="text" id="choice1" name="questions[0].answers[0].text" class="choice-input" placeholder="Enter choice 1" required/>
+                <input type="radio" name="questions[0].correctOption" value="0" required/>
+            </div>
+
+            <div class="answer">
+                <label for="choice2">Choice 2:</label>
+                <input type="text" id="choice2" name="questions[0].answers[1].text" class="choice-input" placeholder="Enter choice 1" required/>
+                <input type="radio" name="questions[0].correctOption" value="1"  required/>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" id="addQuestion" class="btn">Add Question</button>
+
+    <button type="submit" class="btn">Submit Quiz</button>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let questionIndex = 2;
+
+        $("#addQuestion").click(function () {
+            let newQuestion =
+                '<div class="question">' +
+                '<label for="question' + questionIndex + '">Question ' + questionIndex + ':</label>' +
+                '<input type="text" id="question' + questionIndex + '" name="questions[' + (questionIndex - 1) + '].text" required/>' +
+                '<div class="answer">' +
+                '<label for="choice1">Choice 1:</label>' +
+                '<input type="text" id="choice1" name="questions[' + (questionIndex - 1) + '].answers[0].text" required/>' +
+                '<input type="radio" name="questions[' + (questionIndex - 1) + '].correctOption" value="0" required/>' +
+                '</div>' +
+                '<div class="answer">' +
+                '<label for="choice2">Choice 2:</label>' +
+                '<input type="text" id="choice2" name="questions[' + (questionIndex - 1) + '].answers[1].text" required/>' +
+                '<input type="radio" name="questions[' + (questionIndex - 1) + '].correctOption" value="1" required/>' +
+                '</div>' +
+                '</div>';
+            $("#questionsContainer").append(newQuestion);
+            questionIndex++;
+        });
+    });
+</script>
 </body>
 </html>
