@@ -16,14 +16,14 @@
 	<div th:insert="NavigationBarView.html :: navbar"></div>
 
 	<!-- Main Container Start -->
-	<div class="main-container container py-5 px-4">
+	<div class="main-container container-fluid py-5 px-4">
 		<div class="text-box">
 			<h1 class="mb-5 text-center">QuiZZila</h1>
-			<form class="card py-5 px-4" style="background-color: #56a5eb" action="/quiz" method="POST">
+			<form class="card py-5 px-4" style="background-color: #56a5eb; width:560px" action="/quiz" method="POST">
 				<p>Enter Your Name</p>
 				<input type="text" name="username" />
 				<p class="text-danger warning" th:if="${warning}" th:text="${warning}"></p>
-				<button type="submit" class="btn btn-warning">Start Quiz</button>
+				<button type="submit" class="btn btn-warning">START QUIZ</button>
 			</form>
 		</div>
 	</div>

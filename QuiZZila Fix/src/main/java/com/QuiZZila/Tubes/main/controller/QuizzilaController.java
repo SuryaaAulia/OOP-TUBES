@@ -67,4 +67,8 @@ public class QuizzilaController {
 		
 		return "LeaderboardView";
 	}
+	@GetMapping("/login")
+	public String login(Model model){
+		return "LoginView";
+	}
 }
