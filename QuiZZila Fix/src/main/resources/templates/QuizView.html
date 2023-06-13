@@ -24,17 +24,17 @@
 				
 				<div class="option">
 					<input type="radio" th:name="|questions[${i.index}].chose|" th:value="1" />
-					<p th:text="${ques.optionA}"></p>
+					<p class = "my-auto" th:text="${ques.optionA}"></p>
 				</div>
-				
-				<div class="option">
+
+				<div class="option my-2">
 					<input type="radio" th:name="|questions[${i.index}].chose|" th:value="2" />
-					<p th:text="${ques.optionB}"></p>
+					<p class = "my-auto" th:text="${ques.optionB}"></p>
 				</div>
 				
 				<div class="option">
 					<input type="radio" th:name="|questions[${i.index}].chose|" th:value="3" />
-					<p th:text="${ques.optionC}"></p>
+					<p class = "my-auto" th:text="${ques.optionC}"></p>
 				</div>
 				
 				<input type="hidden" th:name="|questions[${i.index}].quesId|" th:value="${ques.quesId}" />

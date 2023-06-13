@@ -22,11 +22,10 @@ public class QuizzilaController {
 
 	@Autowired
 	Hasil hasil;
-
 	@Autowired
 	QuizService quizService;
 	@Autowired
-	QuestionRepository questionRepo;
+	QuestionRepository questionRepository;
 	Boolean submitted = false;
 
 	@ModelAttribute("result")
@@ -42,44 +41,42 @@ public class QuizzilaController {
 	@PostMapping("/quiz")
 	public String quiz(@RequestParam String username, Model m, RedirectAttributes ra) {
 		if (username.equals("")) {
-			ra.addFlashAttribute("warning", "You must enter your name");
+			ra.addFlashAttribute("warning", "Tolong masukkan nama!");
 			return "redirect:/";
 		}
 
 		submitted = false;
 		hasil.setUsername(username);
 
-		List<Question> questions = questionRepo.findAll();
+		List<Question> questions = questionRepository.findAll();
 
 		QuestionForm questionForm = new QuestionForm();
 		questionForm.setQuestions(questions);
-		System.out.println(questionForm.toString());
 		m.addAttribute("qForm", questionForm);
 
 		return "QuizView";
 	}
 
 	@PostMapping("/submit")
-	public String submit(@ModelAttribute QuestionForm qForm, Model m) {
+	public String submit(@ModelAttribute QuestionForm qForm) {
 		if (!submitted) {
 			hasil.setTotalCorrect(quizService.getResult(qForm));
 			quizService.saveScore(hasil);
 			submitted = true;
 		}
-
 		return "HasilView";
 	}
 
 	@GetMapping("/leaderboard")
-	public String score(Model m) {
+	public String score(Model model) {
 		List<Hasil> sList = quizService.getTopScore();
-		m.addAttribute("sList", sList);
+		model.addAttribute("sList", sList);
 
 		return "LeaderboardView";
 	}
 
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login() {
 		return "LoginView";
 	}
 
@@ -95,11 +92,14 @@ public class QuizzilaController {
 	}
 
 	@PostMapping("/addQuestion")
-	public String addQuestion(@RequestParam("title") String title, @RequestParam("optionA") String optionA,
+	public String addQuestion(
+			@RequestParam("title") String title,
+			@RequestParam("optionA") String optionA,
 			@RequestParam("optionB") String optionB,
-			@RequestParam("optionC") String optionC, @RequestParam("ans") int ans, Model model) {
+			@RequestParam("optionC") String optionC,
+			@RequestParam("ans") int ans) {
 		Question question = new Question(title, optionA, optionB, optionC, ans, -1);
-		questionRepo.save(question);
+		questionRepository.save(question);
 		return "redirect:/";
 	}
 }

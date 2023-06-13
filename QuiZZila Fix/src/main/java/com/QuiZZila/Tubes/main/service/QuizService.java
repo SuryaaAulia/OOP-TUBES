@@ -50,7 +50,6 @@ public class QuizService {
 		for (Question q : qForm.getQuestions())
 			if (q.getAns() == q.getChose())
 				correct++;
-
 		return correct;
 	}
 
@@ -62,7 +61,6 @@ public class QuizService {
 	}
 
 	public List<Hasil> getTopScore() {
-		List<Hasil> sList = rRepo.findAll(Sort.by(Sort.Direction.DESC, "totalCorrect"));
-		return sList;
+		return rRepo.findAll(Sort.by(Sort.Direction.DESC, "totalCorrect"));
 	}
 }
