@@ -21,8 +21,6 @@ spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=create
 spring.datasource.initialization-mode=always
   ```
-## Snapshot QuiZZila
-![image](https://github.com/SuryaaAulia/OOP-TUBES/assets/120304394/c464498e-7f3f-4d64-a826-f709867f1cfd)
 
 To-do:
   1. Menghitung nilai dari hasil jawaban.
