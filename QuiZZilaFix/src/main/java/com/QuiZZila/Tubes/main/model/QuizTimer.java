@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class QuizTimer {
-    private int timeLimit; // Batas waktu dalam detik
+    private int timeLimit; 
     private boolean isTimeUp;
     private int remainingTime;
 

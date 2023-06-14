@@ -53,9 +53,7 @@ public class QuizzilaController {
         hasil.setUsername(username);
 
         int timeLimit = 300; 
-        QuizTimer quizTimer = new QuizTimer(timeLimit);
-        model.addAttribute("quizTimer", quizTimer);
-        
+        QuizTimer quizTimer = new QuizTimer(timeLimit);        
 
         List<Question> questions = questionRepository.findAll();
 
