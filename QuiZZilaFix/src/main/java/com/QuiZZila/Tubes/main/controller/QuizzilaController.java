@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.QuiZZila.Tubes.main.model.Hasil;
 import com.QuiZZila.Tubes.main.model.Question;
+import com.QuiZZila.Tubes.main.model.QuestionForm;
+import com.QuiZZila.Tubes.main.model.QuizTimer;
+import com.QuiZZila.Tubes.main.repository.QuestionRepository;
+import com.QuiZZila.Tubes.main.service.QuizService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,93 +17,99 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.QuiZZila.Tubes.main.model.QuestionForm;
-import com.QuiZZila.Tubes.main.repository.QuestionRepository;
-import com.QuiZZila.Tubes.main.service.QuizService;
 
 @Controller
 public class QuizzilaController {
 
-	@Autowired
-	Hasil hasil;
-	@Autowired
-	QuizService quizService;
-	@Autowired
-	QuestionRepository questionRepository;
-	Boolean submitted = false;
+    @Autowired
+    Hasil hasil;
 
-	@ModelAttribute("result")
-	public Hasil getResult() {
-		return hasil;
-	}
+    @Autowired
+    QuizService quizService;
 
-	@GetMapping("/")
-	public String home() {
-		return "LandingPageView";
-	}
+    @Autowired
+    QuestionRepository questionRepository;
 
-	@PostMapping("/quiz")
-	public String quiz(@RequestParam String username, Model m, RedirectAttributes ra) {
-		if (username.equals("")) {
-			ra.addFlashAttribute("warning", "Tolong masukkan nama!");
-			return "redirect:/";
-		}
+    Boolean submitted = false;
 
-		submitted = false;
-		hasil.setUsername(username);
+    @ModelAttribute("result")
+    public Hasil getResult() {
+        return hasil;
+    }
 
-		List<Question> questions = questionRepository.findAll();
+    @GetMapping("/")
+    public String home() {
+        return "LandingPageView";
+    }
 
-		QuestionForm questionForm = new QuestionForm();
-		questionForm.setQuestions(questions);
-		m.addAttribute("qForm", questionForm);
+    @PostMapping("/quiz")
+    public String quiz(@RequestParam String username, Model model, RedirectAttributes ra) {
+        if (username.equals("")) {
+            ra.addFlashAttribute("warning", "Tolong masukkan nama!");
+            return "redirect:/";
+        }
 
-		return "QuizView";
-	}
+        submitted = false;
+        hasil.setUsername(username);
 
-	@PostMapping("/submit")
-	public String submit(@ModelAttribute QuestionForm qForm) {
-		if (!submitted) {
-			hasil.setTotalCorrect(quizService.getResult(qForm));
-			quizService.saveScore(hasil);
-			submitted = true;
-		}
-		return "HasilView";
-	}
+        int timeLimit = 300; 
+        QuizTimer quizTimer = new QuizTimer(timeLimit);
+        model.addAttribute("quizTimer", quizTimer);
+        
 
-	@GetMapping("/leaderboard")
-	public String score(Model model) {
-		List<Hasil> sList = quizService.getTopScore();
-		model.addAttribute("sList", sList);
+        List<Question> questions = questionRepository.findAll();
 
-		return "LeaderboardView";
-	}
+        QuestionForm questionForm = new QuestionForm();
+        questionForm.setQuestions(questions);
+        model.addAttribute("qForm", questionForm);
+        model.addAttribute("quizTimer", quizTimer);
 
-	@GetMapping("/login")
-	public String login() {
-		return "LoginView";
-	}
+        return "QuizView";
+    }
 
-	@GetMapping("/addQuestion")
-	public String addQuestion(Model model) {
-		model.addAttribute("title", "");
-		model.addAttribute("optionA", "");
-		model.addAttribute("optionB", "");
-		model.addAttribute("optionC", "");
-		model.addAttribute("ans", 0);
+    @PostMapping("/submit")
+    public String submit(@ModelAttribute QuestionForm qForm) {
+        if (!submitted) {
+            hasil.setTotalCorrect(quizService.getResult(qForm));
+            quizService.saveScore(hasil);
+            submitted = true;
+        }
+        return "HasilView";
+    }
 
-		return "addQuestion";
-	}
+    @GetMapping("/leaderboard")
+    public String score(Model model) {
+        List<Hasil> sList = quizService.getTopScore();
+        model.addAttribute("sList", sList);
 
-	@PostMapping("/addQuestion")
-	public String addQuestion(
-			@RequestParam("title") String title,
-			@RequestParam("optionA") String optionA,
-			@RequestParam("optionB") String optionB,
-			@RequestParam("optionC") String optionC,
-			@RequestParam("ans") int ans) {
-		Question question = new Question(title, optionA, optionB, optionC, ans, -1);
-		questionRepository.save(question);
-		return "redirect:/";
-	}
+        return "LeaderboardView";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "LoginView";
+    }
+
+    @GetMapping("/addQuestion")
+    public String addQuestion(Model model) {
+        model.addAttribute("title", "");
+        model.addAttribute("optionA", "");
+        model.addAttribute("optionB", "");
+        model.addAttribute("optionC", "");
+        model.addAttribute("ans", 0);
+
+        return "addQuestion";
+    }
+
+    @PostMapping("/addQuestion")
+    public String addQuestion(
+            @RequestParam("title") String title,
+            @RequestParam("optionA") String optionA,
+            @RequestParam("optionB") String optionB,
+            @RequestParam("optionC") String optionC,
+            @RequestParam("ans") int ans) {
+        Question question = new Question(title, optionA, optionB, optionC, ans, -1);
+        questionRepository.save(question);
+        return "redirect:/";
+    }
 }
