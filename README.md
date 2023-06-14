@@ -6,7 +6,7 @@ Tubes yang kami buat mengusung tema website quiz yang menerapkan konsep gabungan
 Ada beberapa requirement yang diperlukan untuk menjalankan sistem QuiZZila ini:
   1. Download [MySQL](https://dev.mysql.com/downloads/mysql/) dan [XAMPP](https://www.apachefriends.org/download.html).
   3. Disarankan menggunakan code editor [IntelliJ IDEA](https://www.jetbrains.com/idea/download/#section=windows) atau [Visual Studio Code](https://code.visualstudio.com/download).
-  4. Jika ingin run application, pada file [application.properties](QuiZZila-Fix/src/main/resources/application.properties)
+  4. Jika ingin run application, pada file [application.properties](QuiZZilaFix/src/main/resources/application.properties)
 seusaikan nama server, database, user, dan password pada XAMPP admin anda.
   
  ![image](https://github.com/SuryaaAulia/OOP-TUBES/assets/120304394/771cb3f5-a384-4583-84d7-a0af1e5f304e)
