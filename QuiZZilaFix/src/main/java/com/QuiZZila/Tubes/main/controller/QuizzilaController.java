@@ -2,15 +2,11 @@ package com.QuiZZila.Tubes.main.controller;
 
 import java.util.List;
 
-<<<<<<< Updated upstream
 import com.QuiZZila.Tubes.main.model.Hasil;
 import com.QuiZZila.Tubes.main.model.Question;
-=======
 import com.QuiZZila.Tubes.main.model.*;
 import com.QuiZZila.Tubes.main.repository.QuestionRepository;
 import com.QuiZZila.Tubes.main.service.QuizService;
->>>>>>> Stashed changes
-
 import com.QuiZZila.Tubes.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.QuiZZila.Tubes.main.model.QuestionForm;
-import com.QuiZZila.Tubes.main.repository.QuestionRepository;
-import com.QuiZZila.Tubes.main.service.QuizService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,14 +29,14 @@ public class QuizzilaController {
 	QuizService quizService;
 	@Autowired
 	QuestionRepository questionRepository;
+	@Autowired
+	UserService usersService;
 	Boolean submitted = false;
 
 	@ModelAttribute("result")
 	public Hasil getResult() {
 		return hasil;
 	}
-
-<<<<<<< Updated upstream
 	@GetMapping("/")
 	public String home() {
 		return "LandingPageView";
@@ -54,13 +48,6 @@ public class QuizzilaController {
 			ra.addFlashAttribute("warning", "Tolong masukkan nama!");
 			return "redirect:/";
 		}
-=======
-    @Autowired
-    QuestionRepository questionRepository;
-    @Autowired
-    UserService usersService;
-    Boolean submitted = false;
->>>>>>> Stashed changes
 
 		submitted = false;
 		hasil.setUsername(username);
@@ -74,7 +61,6 @@ public class QuizzilaController {
 		return "QuizView";
 	}
 
-<<<<<<< Updated upstream
 	@PostMapping("/submit")
 	public String submit(@ModelAttribute QuestionForm qForm) {
 		if (!submitted) {
@@ -92,25 +78,6 @@ public class QuizzilaController {
 
 		return "LeaderboardView";
 	}
-=======
-        List<Question> questions = questionRepository.findAll();
-        QuestionForm questionForm = new QuestionForm();
-
-        int timeLimit = questions.size()*60;
-
-        QuizTimer quizTimer = new QuizTimer(timeLimit);
-
-        questionForm.setQuestions(questions);
-        model.addAttribute("qForm", questionForm);
-        model.addAttribute("quizTimer", quizTimer);
->>>>>>> Stashed changes
-
-	@GetMapping("/login")
-	public String login() {
-		return "LoginView";
-	}
-
-<<<<<<< Updated upstream
 	@GetMapping("/addQuestion")
 	public String addQuestion(Model model) {
 		model.addAttribute("title", "");
@@ -118,7 +85,9 @@ public class QuizzilaController {
 		model.addAttribute("optionB", "");
 		model.addAttribute("optionC", "");
 		model.addAttribute("ans", 0);
-=======
+
+		return "addQuestion";
+	}
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request){
         Users users = (Users) request.getSession().getAttribute("users");
@@ -138,21 +107,6 @@ public class QuizzilaController {
         }
         return "redirect:/login";
     }
-    @PostMapping("/submit")
-    public String submit(@ModelAttribute QuestionForm qForm) {
-        if (!submitted) {
-            hasil.setTotalCorrect(quizService.getResult(qForm));
-            quizService.saveScore(hasil);
-            submitted = true;
-        }
-        return "HasilView";
-    }
->>>>>>> Stashed changes
-
-		return "addQuestion";
-	}
-
-<<<<<<< Updated upstream
 	@PostMapping("/addQuestion")
 	public String addQuestion(
 			@RequestParam("title") String title,
@@ -164,31 +118,4 @@ public class QuizzilaController {
 		questionRepository.save(question);
 		return "redirect:/";
 	}
-=======
-        return "LeaderboardView";
-    }
-
-    @GetMapping("/addQuestion")
-    public String addQuestion(Model model) {
-        model.addAttribute("title", "");
-        model.addAttribute("optionA", "");
-        model.addAttribute("optionB", "");
-        model.addAttribute("optionC", "");
-        model.addAttribute("ans", 0);
-
-        return "addQuestion";
-    }
-
-    @PostMapping("/addQuestion")
-    public String addQuestion(
-            @RequestParam("title") String title,
-            @RequestParam("optionA") String optionA,
-            @RequestParam("optionB") String optionB,
-            @RequestParam("optionC") String optionC,
-            @RequestParam("ans") int ans) {
-        Question question = new Question(title, optionA, optionB, optionC, ans, -1);
-        questionRepository.save(question);
-        return "redirect:/";
-    }
->>>>>>> Stashed changes
 }
