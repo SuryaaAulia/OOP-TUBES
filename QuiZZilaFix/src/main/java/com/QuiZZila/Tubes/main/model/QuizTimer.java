@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class QuizTimer {
-    private int timeLimit; 
+    private int timeLimit;
     private boolean isTimeUp;
     private int remainingTime;
 
@@ -22,15 +22,13 @@ public class QuizTimer {
     private void startTimer() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
-            @Override
             public void run() {
                 isTimeUp = true;
                 timer.cancel();
             }
-        }, 0, 1000); 
+        }, 0, 1000);
 
-    timer.schedule(new TimerTask() {
-            @Override
+        timer.schedule(new TimerTask() {
             public void run() {
                 remainingTime--;
                 if (remainingTime <= 0) {

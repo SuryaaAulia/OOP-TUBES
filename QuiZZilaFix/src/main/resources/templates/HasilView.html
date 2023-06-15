@@ -26,12 +26,6 @@
 				<p>Partisipan:&nbsp;&nbsp;</p>
 				<p th:if="${result}" th:text="${result.username}"></p>
 			</div>
-
-			<div class="d-flex justify-content-center">
-				<p>Total jawaban salah:&nbsp;&nbsp;</p>
-				<p th:if="${result}" th:text="5 - ${result.totalCorrect}"></p>
-			</div>
-
 			<div class="d-flex justify-content-center">
 				<p>Total jawaban benar:&nbsp;&nbsp;</p>
 				<p th:if="${result}" th:text="${result.totalCorrect}"></p>

@@ -14,53 +14,32 @@ import org.springframework.stereotype.Service;
 import com.QuiZZila.Tubes.main.model.QuestionForm;
 
 @Service
-public class QuizService {
-
+public class QuizService extends QuizAbstrak{
 	@Autowired
-	Question question;
-	@Autowired
-	QuestionForm qForm;
-	@Autowired
-	QuestionRepository qRepo;
-	@Autowired
-	Hasil hasil;
-	@Autowired
-	HasilRepository rRepo;
+	HasilRepository hasilRepository;
 
-	public QuestionForm getQuestions() {
-		List<Question> allQues = qRepo.findAll();
-		List<Question> qList = new ArrayList<Question>();
-
-		Random random = new Random();
-
-		for (int i = 0; i < 10; i++) {
-			int rand = random.nextInt(allQues.size());
-			qList.add(allQues.get(rand));
-			allQues.remove(rand);
-		}
-
-		qForm.setQuestions(qList);
-
-		return qForm;
-	}
-
+	@Override
 	public int getResult(QuestionForm qForm) {
 		int correct = 0;
 
-		for (Question q : qForm.getQuestions())
-			if (q.getAns() == q.getChose())
+		for (Question q : qForm.getQuestions()) {
+			if (q.getAns() == q.getChose()) {
 				correct++;
+			}
+		}
 		return correct;
 	}
 
+	@Override
 	public void saveScore(Hasil hasil) {
 		Hasil saveHasil = new Hasil();
 		saveHasil.setUsername(hasil.getUsername());
 		saveHasil.setTotalCorrect(hasil.getTotalCorrect());
-		rRepo.save(saveHasil);
+		hasilRepository.save(saveHasil);
 	}
 
+	@Override
 	public List<Hasil> getTopScore() {
-		return rRepo.findAll(Sort.by(Sort.Direction.DESC, "totalCorrect"));
+		return hasilRepository.findAll(Sort.by(Sort.Direction.DESC, "totalCorrect"));
 	}
 }
