@@ -22,9 +22,3 @@ spring.jpa.hibernate.ddl-auto=create
 spring.datasource.initialization-mode=always
   ```
 
-To-do:
-  1. Menghitung nilai dari hasil jawaban.
-  2. Login.
-  3. Fitur tambah pertanyaan dan custom jumlah pertanyaan yang tersedia jika user melakukan login.
-  4. Timer untuk setiap pengerjaan quiz.
-
