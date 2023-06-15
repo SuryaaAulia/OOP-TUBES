@@ -107,3 +107,8 @@ values(
 	3,
 	-1)
 ;
+insert into users (id, email, password)
+values(
+          1,
+          'suryaaulia@student.telkomuniversity.ac.id',
+          '1302210084');
