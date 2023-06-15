@@ -42,39 +42,32 @@ public class QuizzilaController {
 		return "LandingPageView";
 	}
 
-	@PostMapping("/quiz")
-	public String quiz(@RequestParam String username, Model m, RedirectAttributes ra) {
-		if (username.equals("")) {
-			ra.addFlashAttribute("warning", "Tolong masukkan nama!");
-			return "redirect:/";
-		}
+    Boolean submitted = false;
 
-		submitted = false;
-		hasil.setUsername(username);
+    @ModelAttribute("result")
+    public Hasil getResult() {
+        return hasil;
+    }
 
-		List<Question> questions = questionRepository.findAll();
+    @GetMapping("/")
+    public String home() {
+        return "LandingPageView";
+    }
 
-		QuestionForm questionForm = new QuestionForm();
-		questionForm.setQuestions(questions);
-		m.addAttribute("qForm", questionForm);
+    @PostMapping("/quiz")
+    public String quiz(@RequestParam String username, Model model, RedirectAttributes ra) {
+        if (username.equals("")) {
+            ra.addFlashAttribute("warning", "Tolong masukkan nama!");
+            return "redirect:/";
+        }
 
-		return "QuizView";
-	}
+        submitted = false;
+        hasil.setUsername(username);
 
-	@PostMapping("/submit")
-	public String submit(@ModelAttribute QuestionForm qForm) {
-		if (!submitted) {
-			hasil.setTotalCorrect(quizService.getResult(qForm));
-			quizService.saveScore(hasil);
-			submitted = true;
-		}
-		return "HasilView";
-	}
+        int timeLimit = 300; 
+        QuizTimer quizTimer = new QuizTimer(timeLimit);        
 
-	@GetMapping("/leaderboard")
-	public String score(Model model) {
-		List<Hasil> sList = quizService.getTopScore();
-		model.addAttribute("sList", sList);
+        List<Question> questions = questionRepository.findAll();
 
 		return "LeaderboardView";
 	}
