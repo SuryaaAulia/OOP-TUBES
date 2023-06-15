@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 import com.QuiZZila.Tubes.main.model.QuestionForm;
 
 @Service
-public class QuizService extends QuizAbstrak{
+public class QuizService{
 	@Autowired
 	HasilRepository hasilRepository;
 
-	@Override
+
 	public int getResult(QuestionForm qForm) {
 		int correct = 0;
 
@@ -30,7 +30,7 @@ public class QuizService extends QuizAbstrak{
 		return correct;
 	}
 
-	@Override
+
 	public void saveScore(Hasil hasil) {
 		Hasil saveHasil = new Hasil();
 		saveHasil.setUsername(hasil.getUsername());
@@ -38,7 +38,7 @@ public class QuizService extends QuizAbstrak{
 		hasilRepository.save(saveHasil);
 	}
 
-	@Override
+
 	public List<Hasil> getTopScore() {
 		return hasilRepository.findAll(Sort.by(Sort.Direction.DESC, "totalCorrect"));
 	}
