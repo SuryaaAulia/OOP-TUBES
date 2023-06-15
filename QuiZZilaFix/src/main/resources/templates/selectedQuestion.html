@@ -8,16 +8,11 @@
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/css/LandingpagePage.css}">
-	<title>Home Page</title>
+	<title>Pilih Jumlah Soal</title>
 </head>
 
 <body>
-
-	<!-- Importing NavBar -->
-	<div th:insert="NavigationBarView.html :: navbar"></div>
-
-	<!-- Main Container Start -->
-	<div class="main-container container-fluid py-5 px-4">
+    <div class="main-container container-fluid py-5 px-4">
 		<div class="text-box">
 			<h1 class="mb-5 text-center">QuiZZila</h1>
 			<form class="card py-5 px-4" style="background-color: #56a5eb; width:560px" action="/quiz" method="POST">
@@ -31,9 +26,7 @@
 			</form>
 		</div>
 	</div>
-
-	<!-- Importing Footer -->
-	<div th:insert="FooterView.html :: footer"></div>
+</body>
 
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>

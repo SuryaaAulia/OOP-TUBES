@@ -17,10 +17,6 @@
 	
 	<div class="container py-5 px-4">
 		<h1 class="text-light" style="background-color: #56a5eb" >Only Select The Correct Answers</h1>
-                
-                <div class="text-light" style="background-color: #56a5eb; border: 1px solid #ced4da; border-radius: 4px; padding: 8px; text-align: center; margin-bottom: 16px;">
-                    <span id="timer" style="font-weight: bold;"></span>
-                </div>
 		
 		<form action="submit" method="POST" th:object=${qForm}>
 			<div class="ques-box  text-light" style="background-color: #56a5eb" th:each="ques, i: ${qForm.questions}">
@@ -55,38 +51,5 @@
 	
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Timer Script -->
-<script th:inline="javascript">
-    var remainingTime = /*[[${quizTimer.remainingTime}]]*/;
-    var isTimeUp = /*[[${quizTimer.timeUp}]]*/;
-
-    var timerInterval = setInterval(updateTimer, 1000);
-
-    function updateTimer() {
-    var timerElement = document.getElementById('timer');
-    if (timerElement) {
-        if (remainingTime > 0) {
-            remainingTime--;
-            timerElement.textContent = 'Time Remaining: ' + formatTime(remainingTime);
-        } else {
-            timerElement.textContent = 'Time Up!';
-            clearInterval(timerInterval);
-            
-            var form = document.querySelector('form');
-            form.submit();
-        }
-    }
-}
-
-    function formatTime(seconds) {
-        var minutes = Math.floor(seconds / 60);
-        var remainingSeconds = seconds % 60;
-        return padNumber(minutes) + ':' + padNumber(remainingSeconds);
-    }
-
-    function padNumber(number) {
-        return (number < 10 ? '0' : '') + number;
-    }
-</script>
 </body>
 </html>
