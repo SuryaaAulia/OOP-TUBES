@@ -22,7 +22,6 @@ public class QuizTimer {
     private void startTimer() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
-            @Override
             public void run() {
                 isTimeUp = true;
                 timer.cancel();
@@ -30,7 +29,6 @@ public class QuizTimer {
         }, 0, 1000); 
 
     timer.schedule(new TimerTask() {
-            @Override
             public void run() {
                 remainingTime--;
                 if (remainingTime <= 0) {
